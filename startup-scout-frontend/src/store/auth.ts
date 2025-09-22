@@ -1,6 +1,30 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { authApi, type User, type LoginRequest, type RegisterRequest } from '../api/auth';
+import { authApi } from '../api/auth';
+
+// Define types locally to avoid circular dependencies
+interface User {
+    id: number;
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    date_joined: string;
+}
+
+interface LoginRequest {
+    username: string;
+    password: string;
+}
+
+interface RegisterRequest {
+    username: string;
+    email: string;
+    password: string;
+    password_confirm: string;
+    first_name?: string;
+    last_name?: string;
+}
 
 interface AuthState {
     user: User | null;

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { watchlistApi } from '../api/watchlist';
+import { apiClient } from '../api/client';
 import { useAuthStore } from './auth';
 
 interface WatchlistItem {
@@ -43,7 +44,23 @@ export const useWatchlistStore = create<WatchlistState>()(
                 set({ isLoading: true, error: null });
                 try {
                     const items = await watchlistApi.getWatchlist();
-                    set({ watchlistItems: items, isLoading: false });
+
+                    // Fetch detailed startup information for each item
+                    const itemsWithDetails = await Promise.all(
+                        items.map(async (item) => {
+                            try {
+                                const startupResponse = await apiClient.get(`/startups/${item.startup}/`);
+                                return {
+                                    ...item,
+                                    startup_details: startupResponse.data
+                                };
+                            } catch {
+                                return item; // Return original item if startup details fail to load
+                            }
+                        })
+                    );
+
+                    set({ watchlistItems: itemsWithDetails, isLoading: false });
                 } catch (error) {
                     set({
                         error: error instanceof Error ? error.message : 'Failed to fetch watchlist',

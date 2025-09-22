@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "notes",
     "watchlist",
     "custom_auth",
+    "analytics",
 ]
 
 MIDDLEWARE = [

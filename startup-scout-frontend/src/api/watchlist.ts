@@ -6,6 +6,18 @@ export interface WatchlistItem {
     startup_name: string;
     user_username: string;
     created_at: string;
+    // Additional startup details for enhanced display
+    startup_details?: {
+        id: number;
+        name: string;
+        website: string | null;
+        location: string;
+        industry: string;
+        stage: string;
+        description: string;
+        tags: string;
+        tag_list: string[];
+    };
 }
 
 export const watchlistApi = {

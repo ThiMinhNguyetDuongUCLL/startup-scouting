@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { StartupsPage } from './features/startups/StartupsPage';
 import { StartupDetail } from './features/startups/StartupDetail';
 import { AuthPage } from './pages/AuthPage';
+import { AnalyticsPage } from './pages/AnalyticsPage';
+import { WatchlistPage } from './pages/WatchlistPage';
 import { Layout } from './components/Layout.tsx';
 
 export const AppRouter: React.FC = () => {
@@ -12,6 +14,8 @@ export const AppRouter: React.FC = () => {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<StartupsPage />} />
                     <Route path="startup/:id" element={<StartupDetail />} />
+                    <Route path="watchlist" element={<WatchlistPage />} />
+                    <Route path="analytics" element={<AnalyticsPage />} />
                 </Route>
                 <Route path="/auth" element={<AuthPage />} />
             </Routes>

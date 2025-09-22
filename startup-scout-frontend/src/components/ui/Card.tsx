@@ -71,8 +71,24 @@ export const CardFooter: React.FC<CardFooterProps> = ({
     className = ''
 }) => {
     return (
-        <div className={cn('px-6 py-4 border-t border-gray-200', className)}>
+        <div className={cn('px-6 py-4', className)}>
             {children}
         </div>
+    );
+};
+
+interface CardTitleProps {
+    children: React.ReactNode;
+    className?: string;
+}
+
+export const CardTitle: React.FC<CardTitleProps> = ({
+    children,
+    className = ''
+}) => {
+    return (
+        <h3 className={cn('text-lg font-semibold text-gray-900', className)}>
+            {children}
+        </h3>
     );
 };
