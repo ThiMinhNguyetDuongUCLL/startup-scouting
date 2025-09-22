@@ -51,29 +51,6 @@ Backend will be available at http://localhost:8000
 - django-cors-headers for CORS handling
 - python-dotenv for environment variables
 
-## Phase 0 - Project Scaffolding ✅
-
-**Goals**: Repos, environments, tooling.
-
-**Deliverables**:
-- ✅ Created two repos: `startup-scout-frontend`, `startup_scout_backend`
-- ✅ Added MIT license, README, .gitignore, Issue/PR templates
-- ✅ Frontend scaffold with React TypeScript + Vite
-- ✅ Installed required packages: axios, react-hook-form, zod, zustand, tailwindcss, postcss, autoprefixer
-- ✅ Backend scaffold with Django
-- ✅ Installed required packages: django, djangorestframework, django-cors-headers, python-dotenv, mysqlclient
-- ✅ Configured MySQL database settings
-- ✅ Set up Git workflow with branch naming conventions
-
-**Definition of Done**:
-- ✅ Both apps run locally
-- ✅ READMEs explain setup (npm i && npm run dev, python manage.py runserver)
-- ✅ Initial commit & PR: chore: scaffold repos
-
-## Next Steps
-
-Ready for Phase 1 implementation. Both frontend and backend are properly scaffolded and can run locally.
-
 ## Contributing
 
 1. Create a feature branch: `git checkout -b feat/your-feature-name`
