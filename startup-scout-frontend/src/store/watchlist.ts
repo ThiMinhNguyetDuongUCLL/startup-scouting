@@ -8,7 +8,19 @@ interface WatchlistItem {
     id: number;
     startup: number;
     startup_name: string;
+    user_username: string;
     created_at: string;
+    startup_details?: {
+        id: number;
+        name: string;
+        website: string | null;
+        location: string;
+        industry: string;
+        stage: string;
+        description: string;
+        tags: string;
+        tag_list: string[];
+    };
 }
 
 interface WatchlistState {
