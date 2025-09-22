@@ -18,11 +18,11 @@ export const StartupCard: React.FC<StartupCardProps> = ({
     const { isInWatchlist, addToWatchlist, removeFromWatchlist } = useWatchlistStore();
     const isWatched = isInWatchlist(startup.id);
 
-    const handleWatchlistToggle = () => {
+    const handleWatchlistToggle = async () => {
         if (isWatched) {
-            removeFromWatchlist(startup.id);
+            await removeFromWatchlist(startup.id);
         } else {
-            addToWatchlist(startup.id);
+            await addToWatchlist(startup.id);
             onAddToWatchlist?.(startup.id);
         }
     };

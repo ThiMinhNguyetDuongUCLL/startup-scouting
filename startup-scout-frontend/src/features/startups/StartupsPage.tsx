@@ -6,6 +6,7 @@ import { LoadingSpinner } from '../../components/ui/Spinner';
 import { EmptyState, EmptyStateIcons } from '../../components/ui/EmptyState';
 import { useStartupsStore } from '../../store/startups';
 import { useWatchlistStore } from '../../store/watchlist';
+import { useAuthStore } from '../../store/auth';
 
 export const StartupsPage: React.FC = () => {
   const {
@@ -19,11 +20,15 @@ export const StartupsPage: React.FC = () => {
     clearError,
   } = useStartupsStore();
 
-  const { addToWatchlist } = useWatchlistStore();
+  const { addToWatchlist, fetchWatchlist } = useWatchlistStore();
+  const { isAuthenticated } = useAuthStore();
 
   useEffect(() => {
     fetchStartups();
-  }, []); // Only run once on mount
+    if (isAuthenticated) {
+      fetchWatchlist();
+    }
+  }, [isAuthenticated]); // Run when authentication status changes
 
   useEffect(() => {
     // Debounce search and filters - only fetch if filters actually changed (excluding page)

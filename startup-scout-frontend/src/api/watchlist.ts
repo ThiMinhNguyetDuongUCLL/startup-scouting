@@ -1,5 +1,12 @@
 import { apiClient } from './client';
-import type { WatchlistItem, AddToWatchlistData } from '../types';
+
+export interface WatchlistItem {
+    id: number;
+    startup: number;
+    startup_name: string;
+    user_username: string;
+    created_at: string;
+}
 
 export const watchlistApi = {
     // Get all watchlist items
@@ -9,14 +16,19 @@ export const watchlistApi = {
     },
 
     // Add startup to watchlist
-    addToWatchlist: async (data: AddToWatchlistData): Promise<WatchlistItem> => {
-        const response = await apiClient.post('/watchlist/', data);
+    addToWatchlist: async (startupId: number): Promise<WatchlistItem> => {
+        const response = await apiClient.post('/watchlist/', { startup: startupId });
         return response.data;
     },
 
     // Remove startup from watchlist
-    removeFromWatchlist: async (id: number): Promise<void> => {
-        await apiClient.delete(`/watchlist/${id}/`);
+    removeFromWatchlist: async (startupId: number): Promise<void> => {
+        // First get the watchlist item ID for this startup
+        const watchlist = await watchlistApi.getWatchlist();
+        const item = watchlist.find(item => item.startup === startupId);
+        if (item) {
+            await apiClient.delete(`/watchlist/${item.id}/`);
+        }
     },
 
     // Check if startup is in watchlist
